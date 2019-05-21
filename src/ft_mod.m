@@ -28,9 +28,7 @@ function mod_sig = ft_mod(message, mess_samp_freq, pulse_samp_freq, pulse_w_fact
     else
         mod_sig(i) = 0;                
     end
-    
-    return mod_sig
-    
+        
     figure(1)
     plot(t,mod_sig,'LineWidth',2)
     
