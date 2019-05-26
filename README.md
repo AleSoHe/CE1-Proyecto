@@ -14,3 +14,5 @@ Repositorio del proyecto de Comunicaciones Eléctricas 1 - Implementación de PA
    - Equalizador para mejoramiento de demodulaciónn Flat Top.
 6. main.m
    - Unión de bloques.
+
+![Image description](https://github.com/AleSoHe/CE1-Proyecto/blob/master/figs/natural.pdf)
