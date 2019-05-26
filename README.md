@@ -3,6 +3,7 @@ Repositorio del proyecto de Comunicaciones Eléctricas 1 - Implementación de PA
 
 ## Módulos
 - n_mod.m
+  Modulador PAM Natural.
 - ft_mod.m
 - demod.m
 - channel.m
