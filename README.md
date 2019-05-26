@@ -2,9 +2,9 @@
 Repositorio del proyecto de Comunicaciones Eléctricas 1 - Implementación de PAM en MATLAB
 
 ## Módulos
-- n_mod.m
-  Modulador PAM Natural.
-- ft_mod.m
+1 n_mod.m
+  - Modulador PAM Natural.
+2 ft_mod.m
 - demod.m
 - channel.m
 - equalizer.m
