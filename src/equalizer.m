@@ -1,23 +1,28 @@
-function error = metrics(original,demod)
-    % metrics for a modulated/demodulated signal
-    % INPUTS:
-    %   original: signal without modulation and free of noise
-    %   demod: signal after modulation, noise, and demodulation
-    % OUTPUTS:
-    %   
+function output = equalizer(input, Fs, BW)
 
-    % Fix phase shift of demodulated signal due to filters, channel, etc.
+    % This function receives an "input" signal, of bandwidth "BW", sampled with
+    % a "Fs" frequency
+    % The input signal is processed by an equalizer (1/sa), and the result is
+    % the output of the function
 
-    % Original signal padding, as lengths could be different
+    % [input,Fs] = audioread('..\audio\piano.mp3');
 
-    % Compute signals power
-    original_power = (original.^2)./length(original);
-    demod_power = (demod.^2)./length(demod);
+    % Signal resampling
+    n = 10;
+    input = resample(input,1,n);
+    Fs = Fs/n;
 
-    % Demodulated signal's power normalization
-    demod = demod.*(original_power./demod_power);
+    % Compute normialized cutoff frequency
+    norm_cutoff = BW/Fs;
 
-    % Error cuadrático medio
-    error = ((demod-origial).^2)./length(demod);
+    % Filter design
+    d = fdesign.isinclp('N,Fp,Fst',50,norm_cutoff,norm_cutoff+0.1);
+    Hd = design(d,'SincFrequencyFactor',0.9,'SincPower',5,'SystemObject',true);
+    fvtool(Hd, 'MagnitudeDisplay', 'Magnitude');
+
+    % Signal equalization
+    output = Hd(input);
+
+    % Play music
+    %sound(output,Fs);
 end
-
