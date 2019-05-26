@@ -16,6 +16,8 @@ Repositorio del proyecto de Comunicaciones Eléctricas 1 - Implementación de PA
    - Unión de bloques.
 
 ## Diagramas de bloques a implementar
+### Natural PAM
 ![Natural PAM](https://github.com/AleSoHe/CE1-Proyecto/blob/master/figs/n_mod.jpg)
+### Flat Top PAM *
 ![Flat Top PAM](https://github.com/AleSoHe/CE1-Proyecto/blob/master/figs/ft_mod.jpg)
 
