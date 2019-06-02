@@ -1,6 +1,6 @@
 %Demodulacion para Natural y Flat-Top
  
-function[t1,f,original_t_signal,original_f_signal]=Demod(st,Fc,Fs) %Demodulation Function
+function[t1,original_t_signal]=Demod(st,Fc,Fs) %Demodulation Function
 %inputs: signal, single tone frecuency (cutoff frecuency), sample frecuency.
 
 %outputs: reconstructed time vector, original signal, original signal spectrum.
