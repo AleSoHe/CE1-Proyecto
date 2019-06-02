@@ -27,9 +27,11 @@ function mod_sig = ft_mod(message, mess_samp_freq, pulse_samp_freq, pulse_w_fact
     else
         mod_sig(i) = 0;                
     end
-        
+    
     figure(1)
     plot(t,mod_sig,'LineWidth',2)
+    pause(5)
+    hold off
     
     %figure(2)
     %plot(t,pulse_train)

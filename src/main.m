@@ -8,7 +8,7 @@ clc
 pulse_w_factor = 0.5; %This value will divide the pulse sample period to 
                       %achieve a variety of pulse widths. Use values greater 
                       %than 3
-pulse_samp_freq = 10000;
+pulse_samp_freq = 200;
 
 % -------------------
 % FLAT TOP MODULATION
@@ -47,7 +47,7 @@ function [signal,Fs,BW,t] = choose_signal()
         %Time specifications:
         Fs = 8000; %Samples per second
         dt = 1/Fs; %Seconds per sample
-        StopTime = 0.25; %Seconds
+        StopTime = 0.1; %Seconds
         t = (0:dt:StopTime-dt)'; %Seconds
 
         %Generate sine wave:
