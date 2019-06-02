@@ -29,7 +29,3 @@ function[t1,f,original_t_signal,original_f_signal]=Demod(st,Fc,Fs) %Demodulation
      title('Dominio de la frecuencia');
      xlabel('Frecuencia');
      ylabel('Amplitud');
-
- 
-© 2019 GitHub, Inc.
- 
