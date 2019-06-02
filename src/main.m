@@ -3,7 +3,7 @@ clear all
 clc
 
 % Choose signal
-[signal,Fs,BW,t] = choose_signal();
+[signal, Fs, BW, t] = choose_signal();
 
 pulse_w_factor = 0.5; %This value will divide the pulse sample period to 
                       %achieve a variety of pulse widths. Use values greater 
@@ -15,17 +15,18 @@ pulse_samp_freq = 10000;
 % -------------------
 
 % Flat Top Modulation
-st = ft_mod(signal, Fs, pulse_samp_freq, pulse_w_factor, t);
+mod_sig = ft_mod(signal, Fs, pulse_samp_freq, pulse_w_factor, t);
 
 % Channel
-st = channel(t, st);
+mod_sig_noise = channel(t, mod_sig);
 
 % Demodulation
-Demod(st, BW, Fs);
+demod_sig_noise = demod(mod_sig_noise, BW, Fs);
+demod_sig = demod(mod_sig, BW, Fs);
 
 % Equalizer
-signal = equalizer(input, Fs, BW);
-
+equalized_sig_noise = equalizer(demod_sig_noise, Fs, BW);
+equialized_sig = equalizer(demod_sig, Fs, BW);
 
 % ------------------
 % NATURAL MODULATION

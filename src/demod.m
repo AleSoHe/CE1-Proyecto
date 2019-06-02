@@ -1,4 +1,4 @@
-function[t1,original_t_signal]=Demod(st,Fc,Fs) 
+function original_t_signal = demod(st,Fc,Fs) 
 
     filter = butter(12,(Fc/(Fs/2)),'low'); %funcion del LPF con fc normalizada
     
