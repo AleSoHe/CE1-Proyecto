@@ -1,4 +1,4 @@
-function [R] = PAMn(y,Fs,D,A)
+function [R] = n_mod(y,Fs,D,A)
 len = length(y(:, 1));
 R = zeros(len*A, 2);
 EA = D*A;
