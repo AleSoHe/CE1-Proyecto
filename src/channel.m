@@ -1,7 +1,8 @@
-snr=15;
-out = awgn(modsig,snr);
-figure(6)
-hold on
-plot(t1, out)
-%Al hacer la demodulación se debe llamar la señal out
-%Demod(out,Fc,Fs);
+function out_signal = channel(time,in_signal)
+    snr=15;
+    out = awgn(in,snr);
+    figure(1)
+    hold on
+    plot(time,out)
+    waitforbuttonpress;
+end
