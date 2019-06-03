@@ -5,10 +5,10 @@ clc
 % Choose signal
 [signal, Fs, BW, t] = choose_signal();
 
-pulse_w_factor = 0.5; %This value will divide the pulse sample period to 
+pulse_w_factor = 0.3; %This value will divide the pulse sample period to 
                       %achieve a variety of pulse widths. Use values greater 
                       %than 3
-pulse_samp_freq = 200;
+pulse_samp_freq = 10*BW;
 
 % -------------------
 % FLAT TOP MODULATION
@@ -18,7 +18,7 @@ pulse_samp_freq = 200;
 mod_sig = ft_mod(signal, Fs, pulse_samp_freq, pulse_w_factor, t);
 
 % Channel
-mod_sig_noise = channel(t, mod_sig);
+mod_sig_noise = channel(t, mod_sig,15,1);
 
 % Demodulation
 demod_sig_noise = demod(mod_sig_noise, BW, Fs);
@@ -28,10 +28,13 @@ demod_sig = demod(mod_sig, BW, Fs);
 equalized_sig_noise = equalizer(demod_sig_noise, Fs, BW);
 equialized_sig = equalizer(demod_sig, Fs, BW);
 
+% Play signal
+sound(demod_sig,Fs);
+
 % ------------------
 % NATURAL MODULATION
 % ------------------
-
+%mod_sig = n_mod();
 
 % ---------
 % FUNCTIONS
@@ -61,10 +64,10 @@ function [signal,Fs,BW,t] = choose_signal()
         plot(t,signal)
 
     elseif select == 2
-        [y,Fs] = audioread('test.mp3'); %Load song
+        [y,Fs] = audioread('..\audio\Clip.wav'); %Load song
 
         dt = 1/Fs; %Seconds per sample
-        StopTime = 1; %Seconds
+        StopTime = 2.5; %Seconds
         t = (0:dt:StopTime-dt)'; %Seconds
 
         signal = y(1:Fs*StopTime,1); %Cut song to desired length

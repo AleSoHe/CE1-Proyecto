@@ -8,7 +8,7 @@ function output = equalizer(input, Fs, BW)
     % [input,Fs] = audioread('..\audio\piano.mp3');
 
     % Signal resampling
-    n = 10;
+    n = 1;
     input = resample(input,1,n);
     Fs = Fs/n;
 
@@ -22,7 +22,8 @@ function output = equalizer(input, Fs, BW)
 
     % Signal equalization
     output = Hd(input);
-
+    plot(output)
+    pause(5)
     % Play music
     %sound(output,Fs);
 end

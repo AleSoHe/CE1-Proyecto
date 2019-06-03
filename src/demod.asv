@@ -1,14 +1,13 @@
 function original_t_signal = demod(st,Fc,Fs) 
 
-    [b,a] = butter(6,(Fc/(Fs/2)),'low'); %funcion del LPF con fc normalizada
+    filter = cheby1(10,(Fc/(Fs/1.5)),'low'); %funcion del LPF con fc normalizada
 
     gain_compdB = 12*20 + 20 + 3; %gain amp factor in dB for order = 12 plus 20db of initial loss + 3db of cutoff frequency range
     gain_comp = 10^(gain_compdB/20); %gain amp factor 
     f_comp = (1/1000); %frequency comp factor
 
-    %original_t_signal = gain_comp*conv(filter,st); %convolucion de la funcion de transferencia del filtro LPF con la senal modulada
-    original_t_signal = filter(b,a,st);
-    
+    original_t_signal = gain_comp*conv(filter,st); %convolucion de la funcion de transferencia del filtro LPF con la senal modulada
+
     original_f_signal = f_comp*fftshift(abs(fft(original_t_signal))); %obtencion de funcion en f original usando FFT
 
     t1 = 0:1/Fs:(1/Fs)*length(original_t_signal)-1/Fs; %periodo de tiempo para plot
