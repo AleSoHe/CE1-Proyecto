@@ -5,7 +5,7 @@ clc
 % Choose signal
 [signal, Fs, BW, t] = choose_signal();
 
-pulse_w_factor = 0.9; %This value will divide the pulse sample period to 
+pulse_w_factor = 0.5; %This value will divide the pulse sample period to 
                       %achieve a variety of pulse widths. Use values greater 
                       %than 3
 pulse_samp_freq = 20*BW;
@@ -14,7 +14,7 @@ A = 1;
 
 % -------------------
 % FLAT TOP MODULATION
-% -------------------
+% -------------------m   
 
 % Flat Top Modulation
 mod_sig_ft = ft_mod(signal, Fs, pulse_samp_freq, pulse_w_factor, t);
@@ -38,7 +38,7 @@ sound(demod_sig_ft,Fs);
 % ------------------
 
 %Natural PAM Modulation
-mod_sig_nat = n_mod(signal,Fs,D,A);
+mod_sig_nat = n_mod2(signal, Fs, pulse_samp_freq, pulse_w_factor, t);
 
 %Channel
 mod_sig_nat_noise = channel(t, mod_sig_nat,15,1);
