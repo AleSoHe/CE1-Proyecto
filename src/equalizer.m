@@ -14,7 +14,7 @@ function output = equalizer(input, Fs, BW, signal_name)
     norm_cutoff = BW/Fs;
 
     % Filter design
-    d = fdesign.isinclp('N,Fp,Fst',20,norm_cutoff,norm_cutoff+0.1);
+    d = fdesign.isinclp('N,Fp,Fst',50,norm_cutoff,norm_cutoff+0.1);
     Hd = design(d,'SincFrequencyFactor',0.9,'SincPower',1,'SystemObject',true);
     
     % Plot equalizer magnitude response

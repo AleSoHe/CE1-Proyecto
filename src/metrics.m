@@ -30,8 +30,12 @@ function [MSE,SNR] = metrics(original,demod_sig,demod_noise)
     % Signal to noise ratio (output)
     SNR = demod_power/noise_power;
     
-    disp(['Error cuadrático medio: ',num2str(MSE)]);
+    %Correlation between
+    corr = max(xcorr(original, demod_norm));
+    
+    disp(['Máxima correlación: ',num2str(corr)]);
     disp(['Razón de señal a ruido: ',num2str(SNR)]);
+    %disp(['Error cuadrático medio: ',num2str(MSE)]);
     
 end
 

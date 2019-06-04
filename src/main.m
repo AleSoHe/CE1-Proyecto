@@ -5,7 +5,7 @@ clc
 % Choose signal
 [signal, Fs, BW, t] = choose_signal();
 
-pulse_w_factor = 0.5; %This value will divide the pulse sample period to 
+pulse_w_factor = 0.4; %This value will divide the pulse sample period to 
                       %achieve a variety of pulse widths. Use values greater 
                       %than 3
 pulse_samp_freq = 20*BW;
@@ -93,7 +93,7 @@ function [signal,Fs,BW,t] = choose_signal()
         ylabel("Amplitud")
 
     elseif select == 2
-        [y,Fs] = audioread('..\audio\Clip.wav'); %Load song
+        [y,Fs] = audioread('..\audio\obama.mp3'); %Load song
 
         dt = 1/Fs; %Seconds per sample
         StopTime = 1; %Seconds
