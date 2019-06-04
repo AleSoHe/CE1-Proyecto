@@ -9,8 +9,6 @@ pulse_w_factor = 0.5; %This value will divide the pulse sample period to
                       %achieve a variety of pulse widths. Use values greater 
                       %than 3
 pulse_samp_freq = 20*BW;
-D = 10;
-A = 1;
 
 % -------------------
 % FLAT TOP MODULATION
@@ -32,6 +30,8 @@ equialized_sig_ft = equalizer(demod_sig_ft, Fs, BW);
 
 % Play signal
 sound(demod_sig_ft,Fs);
+
+metrics(signal,demod_sig_ft,demod_noise_ft);
 
 % ------------------
 % NATURAL MODULATION
