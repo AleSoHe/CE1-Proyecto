@@ -9,18 +9,21 @@ pulse_w_factor = 0.5; %This value will divide the pulse sample period to
                       %achieve a variety of pulse widths. Use values greater 
                       %than 3
 pulse_samp_freq = 20*BW;
+snr_channel = 50; % Channel SNR
+atn = 1; % Channel attenuation
 D = 10;
 A = 1;
 
 % -------------------
 % FLAT TOP MODULATION
-% -------------------m   
+% ------------------- 
+
 
 % Flat Top Modulation
-mod_sig_ft = ft_mod(signal, Fs, pulse_samp_freq, pulse_w_factor, t);
+mod_sig_ft = (ft_mod(signal, Fs, pulse_samp_freq, pulse_w_factor, t))';
 
 % Channel
-mod_sig_ft_noise = channel(t, mod_sig_ft,15,1);
+mod_sig_ft_noise = channel(t, mod_sig_ft,snr_channel,atn);
 
 % Demodulation
 demod_sig_ft_noise = demod(mod_sig_ft_noise, BW, Fs);
@@ -33,6 +36,12 @@ equialized_sig_ft = equalizer(demod_sig_ft, Fs, BW);
 % Play signal
 sound(demod_sig_ft,Fs);
 
+% Metrics
+fprintf('\nMétricas de PAM Flat Top sin ecualización\n')
+metrics(signal,demod_sig_ft,demod_sig_ft_noise);
+fprintf('\nMétricas de PAM Flat Top con ecualización\n')
+metrics(signal,equialized_sig_ft,equalized_sig_ft_noise);
+
 % ------------------
 % NATURAL MODULATION
 % ------------------
@@ -41,7 +50,7 @@ sound(demod_sig_ft,Fs);
 mod_sig_nat = n_mod2(signal, Fs, pulse_samp_freq, pulse_w_factor, t);
 
 %Channel
-mod_sig_nat_noise = channel(t, mod_sig_nat,15,1);
+mod_sig_nat_noise = channel(t, mod_sig_nat,snr_channel,atn);
 
 %Demodulation
 demod_sig_nat_noise = demod(mod_sig_nat_noise, BW, Fs);
@@ -49,6 +58,10 @@ demod_sig_nat = demod(mod_sig_nat, BW, Fs);
 
 %Play signal
 sound(demod_sig_nat,Fs);
+
+% Metrics
+fprintf('\nMétricas de PAM natural\n')
+metrics(signal,demod_sig_nat,demod_sig_nat_noise);
 
 % ---------
 % FUNCTIONS

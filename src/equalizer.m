@@ -17,7 +17,7 @@ function output = equalizer(input, Fs, BW)
 
     % Filter design
     d = fdesign.isinclp('N,Fp,Fst',50,norm_cutoff,norm_cutoff+0.1);
-    Hd = design(d,'SincFrequencyFactor',0.9,'SincPower',5,'SystemObject',true);
+    Hd = design(d,'SincFrequencyFactor',0.9,'SincPower',1,'SystemObject',true);
     fvtool(Hd, 'MagnitudeDisplay', 'Magnitude');
 
     % Signal equalization
