@@ -19,7 +19,7 @@ function [MSE,SNR] = metrics(original,demod_sig,demod_noise)
     demod_norm = demod_sig.*(original_power/demod_power);
 
     % Mean Squared Error
-    MSE = sum(((demod_norm-original').^2))/length(demod_norm);
+    MSE = sum(((demod_norm-original).^2))/length(demod_norm);
     
     % Noise
     noise = demod_noise - demod_sig; % demodulated signal - demodulated signal with noise
