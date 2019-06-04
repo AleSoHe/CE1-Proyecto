@@ -93,7 +93,7 @@ function [signal,Fs,BW,t] = choose_signal()
         ylabel("Amplitud")
 
     elseif select == 2
-        [y,Fs] = audioread('..\audio\obama.mp3'); %Load song
+        [y,Fs] = audioread('..\audio\Clip.wav'); %Load song
 
         dt = 1/Fs; %Seconds per sample
         StopTime = 1; %Seconds
