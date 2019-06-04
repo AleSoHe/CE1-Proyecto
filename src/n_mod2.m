@@ -11,6 +11,9 @@ function mod_sig = n_mod2(message, mess_samp_freq, pulse_samp_freq, pulse_w_fact
     
     figure(1)
     plot(t,mod_sig,'LineWidth',2)
+    title("Tono Modulado por Pulsos")
+    xlabel("Tiempo(s)")
+    ylabel("Amplitud")
     pause(10)
     hold off
     
