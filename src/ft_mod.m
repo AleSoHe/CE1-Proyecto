@@ -29,6 +29,9 @@ function mod_sig = ft_mod(message, mess_samp_freq, pulse_samp_freq, pulse_w_fact
     end
     
     figure(1)
+    title("Señal Modulada por Pulsos (Flat-Top)")
+    xlabel("Tiempo(s)")
+    ylabel("Amplitud")
     plot(t,mod_sig,'LineWidth',2)
     pause(10)
     hold off
