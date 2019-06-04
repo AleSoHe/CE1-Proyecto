@@ -18,7 +18,6 @@ A = 1;
 % FLAT TOP MODULATION
 % ------------------- 
 
-
 % Flat Top Modulation
 mod_sig_ft = (ft_mod(signal, Fs, pulse_samp_freq, pulse_w_factor, t))';
 
@@ -37,9 +36,9 @@ equialized_sig_ft = equalizer(demod_sig_ft, Fs, BW, ' Flat Top sin ruido');
 sound(demod_sig_ft,Fs);
 
 % Metrics
-fprintf('\nMÃ©tricas de PAM Flat Top sin ecualizaciÃ³n\n')
+fprintf('\nMétricas de PAM Flat Top sin ecualización\n')
 metrics(signal,demod_sig_ft,demod_sig_ft_noise);
-fprintf('\nMÃ©tricas de PAM Flat Top con ecualizaciÃ³n\n')
+fprintf('\nMétricas de PAM Flat Top con ecualización\n')
 metrics(signal,equialized_sig_ft,equalized_sig_ft_noise);
 
 % ------------------
@@ -47,7 +46,7 @@ metrics(signal,equialized_sig_ft,equalized_sig_ft_noise);
 % ------------------
 
 %Natural PAM Modulation
-mod_sig_nat = n_mod2(signal, Fs, pulse_samp_freq, pulse_w_factor, t);
+mod_sig_nat = n_mod(signal, Fs, D, A);
 
 %Channel
 mod_sig_nat_noise = channel(t, mod_sig_nat,snr_channel,atn);
@@ -60,7 +59,7 @@ demod_sig_nat = demod(mod_sig_nat, BW, Fs);
 sound(demod_sig_nat,Fs);
 
 % Metrics
-fprintf('\nMÃ©tricas de PAM natural\n')
+fprintf('\nMétricas de PAM natural\n')
 metrics(signal,demod_sig_nat,demod_sig_nat_noise);
 
 % ---------
@@ -70,8 +69,8 @@ metrics(signal,demod_sig_nat,demod_sig_nat_noise);
 % Choose signal function (sine or audio)
 function [signal,Fs,BW,t] = choose_signal()
     disp('1. Tono')
-    disp('2. CanciÃ³n')
-    select = input('Seleccione la seÃ±al de entrada: ');
+    disp('2. Canción')
+    select = input('Seleccione la señal de entrada: ');
 
     if select == 1
         %Time specifications:
