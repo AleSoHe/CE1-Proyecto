@@ -1,40 +1,54 @@
 close all
-clear all
+%clear all
 clc
 
 % Choose signal
 [signal, Fs, BW, t] = choose_signal();
 
-pulse_w_factor = 0.3; %This value will divide the pulse sample period to 
+pulse_w_factor = 0.9; %This value will divide the pulse sample period to 
                       %achieve a variety of pulse widths. Use values greater 
                       %than 3
-pulse_samp_freq = 10*BW;
+pulse_samp_freq = 20*BW;
+D = 10;
+A = 1;
 
 % -------------------
 % FLAT TOP MODULATION
 % -------------------
 
 % Flat Top Modulation
-mod_sig = ft_mod(signal, Fs, pulse_samp_freq, pulse_w_factor, t);
+mod_sig_ft = ft_mod(signal, Fs, pulse_samp_freq, pulse_w_factor, t);
 
 % Channel
-mod_sig_noise = channel(t, mod_sig,15,1);
+mod_sig_ft_noise = channel(t, mod_sig_ft,15,1);
 
 % Demodulation
-demod_sig_noise = demod(mod_sig_noise, BW, Fs);
-demod_sig = demod(mod_sig, BW, Fs);
+demod_sig_ft_noise = demod(mod_sig_ft_noise, BW, Fs);
+demod_sig_ft = demod(mod_sig_ft, BW, Fs);
 
 % Equalizer
-equalized_sig_noise = equalizer(demod_sig_noise, Fs, BW);
-equialized_sig = equalizer(demod_sig, Fs, BW);
+equalized_sig_ft_noise = equalizer(demod_sig_ft_noise, Fs, BW);
+equialized_sig_ft = equalizer(demod_sig_ft, Fs, BW);
 
 % Play signal
-sound(demod_sig,Fs);
+sound(demod_sig_ft,Fs);
 
 % ------------------
 % NATURAL MODULATION
 % ------------------
-%mod_sig = n_mod();
+
+%Natural PAM Modulation
+mod_sig_nat = n_mod(signal,Fs,D,A);
+
+%Channel
+mod_sig_nat_noise = channel(t, mod_sig_nat,15,1);
+
+%Demodulation
+demod_sig_nat_noise = demod(mod_sig_nat_noise, BW, Fs);
+demod_sig_nat = demod(mod_sig_nat, BW, Fs);
+
+%Play signal
+sound(demod_sig_nat,Fs);
 
 % ---------
 % FUNCTIONS
@@ -67,7 +81,7 @@ function [signal,Fs,BW,t] = choose_signal()
         [y,Fs] = audioread('..\audio\Clip.wav'); %Load song
 
         dt = 1/Fs; %Seconds per sample
-        StopTime = 2.5; %Seconds
+        StopTime = 1; %Seconds
         t = (0:dt:StopTime-dt)'; %Seconds
 
         signal = y(1:Fs*StopTime,1); %Cut song to desired length
