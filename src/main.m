@@ -9,7 +9,7 @@ pulse_w_factor = 0.5; %This value will divide the pulse sample period to
                       %achieve a variety of pulse widths. Use values greater 
                       %than 3
 pulse_samp_freq = 20*BW;
-snr_channel = 50; % Channel SNR
+snr_channel = 10; % Channel SNR
 atn = 1; % Channel attenuation
 D = 10;
 A = 1;
@@ -30,8 +30,8 @@ demod_sig_ft_noise = demod(mod_sig_ft_noise, BW, Fs);
 demod_sig_ft = demod(mod_sig_ft, BW, Fs);
 
 % Equalizer
-equalized_sig_ft_noise = equalizer(demod_sig_ft_noise, Fs, BW);
-equialized_sig_ft = equalizer(demod_sig_ft, Fs, BW);
+equalized_sig_ft_noise = equalizer(demod_sig_ft_noise, Fs, BW, ' Flat Top con ruido');
+equialized_sig_ft = equalizer(demod_sig_ft, Fs, BW, ' Flat Top sin ruido');
 
 % Play signal
 sound(demod_sig_ft,Fs);
