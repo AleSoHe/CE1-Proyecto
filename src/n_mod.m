@@ -1,8 +1,9 @@
+    
 function [mod_sig] = n_mod(message,Fs,D,A)
-    len = length(message(:, 1));
+    [len, c] = size(message);
     mod_sig = zeros(len*A, 2);
     EA = D*A;
-    message(len+1, :) = [0, 0];
+    message(len+1, :) = zeros(1, c);
     for i = A:A*len+A-1
         %modulate
         if(mod(floor(i/EA), 2) == 0)
