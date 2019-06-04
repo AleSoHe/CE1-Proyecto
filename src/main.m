@@ -37,9 +37,9 @@ equialized_sig_ft = equalizer(demod_sig_ft, Fs, BW, ' Flat Top sin ruido');
 sound(demod_sig_ft,Fs);
 
 % Metrics
-fprintf('\nMétricas de PAM Flat Top sin ecualización\n')
+fprintf('\nMÃ©tricas de PAM Flat Top sin ecualizaciÃ³n\n')
 metrics(signal,demod_sig_ft,demod_sig_ft_noise);
-fprintf('\nMétricas de PAM Flat Top con ecualización\n')
+fprintf('\nMÃ©tricas de PAM Flat Top con ecualizaciÃ³n\n')
 metrics(signal,equialized_sig_ft,equalized_sig_ft_noise);
 
 % ------------------
@@ -60,7 +60,7 @@ demod_sig_nat = demod(mod_sig_nat, BW, Fs);
 sound(demod_sig_nat,Fs);
 
 % Metrics
-fprintf('\nMétricas de PAM natural\n')
+fprintf('\nMÃ©tricas de PAM natural\n')
 metrics(signal,demod_sig_nat,demod_sig_nat_noise);
 
 % ---------
@@ -70,8 +70,8 @@ metrics(signal,demod_sig_nat,demod_sig_nat_noise);
 % Choose signal function (sine or audio)
 function [signal,Fs,BW,t] = choose_signal()
     disp('1. Tono')
-    disp('2. Canción')
-    select = input('Seleccione la señal de entrada: ');
+    disp('2. CanciÃ³n')
+    select = input('Seleccione la seÃ±al de entrada: ');
 
     if select == 1
         %Time specifications:
@@ -89,6 +89,9 @@ function [signal,Fs,BW,t] = choose_signal()
         figure(1)
         hold on
         plot(t,signal)
+        title("Mensaje (Tono Simple)")
+        xlabel("Tiempo(s)")
+        ylabel("Amplitud")
 
     elseif select == 2
         [y,Fs] = audioread('..\audio\Clip.wav'); %Load song
@@ -104,5 +107,8 @@ function [signal,Fs,BW,t] = choose_signal()
         figure(1)
         hold on
         plot(t,signal)
+        title("Mensaje(Audio)")
+        xlabel("Tiempo(s)")
+        ylabel("Amplitud")
     end
 end
